@@ -198,6 +198,7 @@ class Activity {
      */
     constructor() {
         globalActivity = this;
+        window.globalActivity = this;
 
         this.cellSize = 55;
         this.searchSuggestions = [];
@@ -6949,10 +6950,14 @@ class Activity {
 
 const activity = new Activity();
 
-require(["domReady!"], (doc) =>{
+require(["domReady!"], (doc) => {
     setTimeout(() => {
         activity.setupDependencies();
         activity.domReady(doc);
+
+        // Dispatch a custom event to signal that globalActivity is ready
+        const event = new CustomEvent('globalActivityReady');
+        document.dispatchEvent(event);  
     }, 5000);
 });
 

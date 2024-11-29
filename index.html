@@ -109,8 +109,10 @@
             }
         </script>
         <script type="text/javascript">
-            $(document).ready(function() {
-                doSearch();
+            $(document).ready(function () {
+                $(document).on('globalActivityReady', function () {
+                    window.globalActivity.doSearch();
+                });
             });
         </script>
     </head>
